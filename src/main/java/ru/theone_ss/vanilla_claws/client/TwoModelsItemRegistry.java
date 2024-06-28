@@ -23,7 +23,7 @@ public class TwoModelsItemRegistry {
     public static void register(Item... items) {
         for(Item item : items) {
             Identifier id = Registries.ITEM.getId(item);
-            ENTRIES.put(id, item);
+            ENTRIES.put(Identifier.of(id.getNamespace(), "item/" + id.getPath() + "_in_hand"), item);
         }
     }
 

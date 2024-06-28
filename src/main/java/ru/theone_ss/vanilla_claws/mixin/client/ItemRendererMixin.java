@@ -1,5 +1,6 @@
 package ru.theone_ss.vanilla_claws.mixin.client;
 
+import net.fabricmc.fabric.api.client.model.loading.v1.FabricBakedModelManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.StainedGlassPaneBlock;
 import net.minecraft.block.TranslucentBlock;
@@ -17,6 +18,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MatrixUtil;
 import net.minecraft.world.World;
@@ -67,7 +69,7 @@ public abstract class ItemRendererMixin {
     void getModel(ItemStack stack, World world, LivingEntity entity, int seed, CallbackInfoReturnable<BakedModel> cir) {
         TwoModelsItemRegistry.ENTRIES.forEach((id, item) -> {
             if (!stack.isEmpty() && stack.isOf(item) && entity != null) {
-                BakedModel model = models.getModelManager().getModel(new ModelIdentifier(Identifier.of(id + "_in_hand"), "inventory"));
+                BakedModel model = ((FabricBakedModelManager)models.getModelManager()).getModel(id);
                 cir.setReturnValue(model);
             }
         });
@@ -137,7 +139,7 @@ public abstract class ItemRendererMixin {
                     if (bl) {
 
                         matrices.push();
-                        BakedModel bakedModel = models.getModelManager().getModel(new ModelIdentifier(identifier, "inventory"));
+                        BakedModel bakedModel = models.getModel(item);
                         bakedModel.getTransformation().getTransformation(renderMode).apply(leftHanded, matrices);
                         matrices.translate(-0.5F, -0.5F, -0.5F);
 
