@@ -24,7 +24,7 @@
     }
   },
 
-  "license": "MIT",
+  "license": "ARR",
   "icon": "assets/vanilla_claws/VanillaClawsIcon.png",
 
   "environment": "*",
@@ -37,7 +37,7 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "minecraft": ">=1.20",
-    "java": ">=17"
+    "minecraft": ">=1.21",
+    "java": ">=21"
   }
 }

@@ -1,6 +1,6 @@
 plugins {
-	id "fabric-loom" version "0.12-SNAPSHOT"
-	id "io.github.juuxel.loom-quiltflower" version "1.7.2"
+	id "fabric-loom" version "1.6-SNAPSHOT"
+	id "io.github.juuxel.loom-quiltflower" version "1.10.0"
 }
 
 archivesBaseName = project.archives_base_name
@@ -14,7 +14,7 @@ repositories {
 	}
 	maven { url "https://maven.terraformersmc.com/" }
 	maven { url "https://ladysnake.jfrog.io/artifactory/mods" }
-	maven { url "https://maven.jamieswhiteshirt.com/libs-release" } //reach-entity-attributes
+	//maven { url "https://maven.jamieswhiteshirt.com/libs-release" } //reach-entity-attributes
 }
 
 dependencies {
@@ -23,7 +23,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api}"
 
-	include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:2.4.0")
+	//include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:2.4.0")
 }
 
 processResources {
@@ -36,12 +36,12 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = "UTF-8"
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 	
 	withSourcesJar()
 }
