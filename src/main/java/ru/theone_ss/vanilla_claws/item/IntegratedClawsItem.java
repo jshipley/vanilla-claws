@@ -1,7 +1,6 @@
 package ru.theone_ss.vanilla_claws.item;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.text.Text;
@@ -11,19 +10,18 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Locale;
 
 public class IntegratedClawsItem extends ClawsItem {
     public String requiredMod;
     public boolean isRequiredModInstalled;
 
-    public IntegratedClawsItem(String requiredMod, ToolMaterial material, int damage, float attackSpeed, Settings settings) {
-        super(material, damage, attackSpeed, settings);
+    public IntegratedClawsItem(String requiredMod, ToolMaterial material, Settings settings) {
+        super(material, settings);
         this.requiredMod = requiredMod;
         this.isRequiredModInstalled = FabricLoader.getInstance().isModLoaded(requiredMod);
     }
 
-    @Override
+/*    @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
         if(!isRequiredModInstalled) {
@@ -31,6 +29,6 @@ public class IntegratedClawsItem extends ClawsItem {
             text = text.replaceAll("%", requiredMod.substring(0, 1).toUpperCase() + requiredMod.substring(1));
             tooltip.add(Text.of(text).copy().formatted(Formatting.GRAY));
         }
-    }
+    }*/
 
 }

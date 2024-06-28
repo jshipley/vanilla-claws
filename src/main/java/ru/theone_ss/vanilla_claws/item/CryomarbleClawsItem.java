@@ -8,8 +8,8 @@ import net.minecraft.item.ToolMaterial;
 
 public class CryomarbleClawsItem extends IntegratedClawsItem {
 
-    public CryomarbleClawsItem(ToolMaterial material, int damage, float attackSpeed, Settings settings) {
-        super("winterly", material, damage, attackSpeed, settings);
+    public CryomarbleClawsItem(ToolMaterial material, Settings settings) {
+        super("winterly", material, settings);
     }
 
     @Override

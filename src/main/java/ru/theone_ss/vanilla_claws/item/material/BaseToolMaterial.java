@@ -1,7 +1,9 @@
 package ru.theone_ss.vanilla_claws.item.material;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Lazy;
 
 import java.util.function.Supplier;
@@ -9,15 +11,13 @@ import java.util.function.Supplier;
 @SuppressWarnings("deprecation")
 public class BaseToolMaterial implements ToolMaterial {
 
-    private final int miningLevel;
     private final int itemDurability;
     private final float miningSpeed;
     private final float attackDamage;
     private final int enchantability;
     private final Lazy<Ingredient> repairIngredient;
 
-    public BaseToolMaterial(int miningLevel, int durability, float miningSpeed, float damage, int enchantability, Supplier<Ingredient> repairIngredient) {
-        this.miningLevel = miningLevel;
+    public BaseToolMaterial(int durability, float miningSpeed, float damage, int enchantability, Supplier<Ingredient> repairIngredient) {
         this.itemDurability = durability;
         this.miningSpeed = miningSpeed;
         this.attackDamage = damage;
@@ -41,8 +41,8 @@ public class BaseToolMaterial implements ToolMaterial {
     }
 
     @Override
-    public int getMiningLevel() {
-        return this.miningLevel;
+    public TagKey<Block> getInverseTag() {
+        return null;
     }
 
     @Override

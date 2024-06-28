@@ -1,7 +1,7 @@
 package ru.theone_ss.vanilla_claws.client;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
+import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.util.Identifier;
 import ru.theone_ss.vanilla_claws.item.ClawsItem;
@@ -16,9 +16,8 @@ public class VanillaClawsClient implements ClientModInitializer {
             if (item instanceof ClawsItem) TwoModelsItemRegistry.register(item);
         });
 
-        ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> TwoModelsItemRegistry.ENTRIES.forEach((id, item) ->
-                out.accept(new ModelIdentifier(new Identifier(id + "_in_hand"), "inventory"))
-        ));
+        ModelLoadingPlugin.register(pluginContext -> TwoModelsItemRegistry.ENTRIES.forEach((identifier, item) ->
+                pluginContext.addModels(new ModelIdentifier(Identifier.of(identifier + "_in_hand"), ModelIdentifier.INVENTORY_VARIANT).id())));
     }
  }
 
