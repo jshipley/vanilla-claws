@@ -7,7 +7,8 @@
     "item": "minecraft:netherite_ingot"
   },
   "result": {
-    "item": "vanilla_claws:netherite_claws"
+    "count": 1,
+    "id": "vanilla_claws:netherite_claws"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

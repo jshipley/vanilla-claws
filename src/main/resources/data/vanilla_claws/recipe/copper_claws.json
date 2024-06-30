@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
     "iii",
     "LLL",
@@ -7,14 +8,14 @@
   ],
   "key": {
     "i": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:copper_ingot"
     },
     "L": {
       "item": "minecraft:leather"
     }
   },
   "result": {
-    "item": "vanilla_claws:iron_claws",
+    "id": "vanilla_claws:copper_claws",
     "count": 1
   }
 }

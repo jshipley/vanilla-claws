@@ -1,20 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "iii",
+    "ici",
     "LLL",
     " L "
   ],
   "key": {
+    "c": {
+      "item": "winterly:cryomarble"
+    },
     "i": {
-      "item": "minecraft:diamond"
+      "item": "minecraft:iron_ingot"
     },
     "L": {
       "item": "minecraft:leather"
     }
   },
   "result": {
-    "item": "vanilla_claws:diamond_claws",
+    "id": "vanilla_claws:cryomarble_claws",
     "count": 1
   }
 }

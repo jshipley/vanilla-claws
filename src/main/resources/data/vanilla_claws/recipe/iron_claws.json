@@ -1,14 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
-    "ici",
+    "iii",
     "LLL",
     " L "
   ],
   "key": {
-    "c": {
-      "item": "winterly:cryomarble"
-    },
     "i": {
       "item": "minecraft:iron_ingot"
     },
@@ -17,7 +15,7 @@
     }
   },
   "result": {
-    "item": "vanilla_claws:cryomarble_claws",
+    "id": "vanilla_claws:iron_claws",
     "count": 1
   }
 }
