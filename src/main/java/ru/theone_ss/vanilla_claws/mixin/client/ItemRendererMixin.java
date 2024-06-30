@@ -1,9 +1,7 @@
 package ru.theone_ss.vanilla_claws.mixin.client;
 
-import net.fabricmc.fabric.api.client.model.loading.v1.FabricBakedModelManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.StainedGlassPaneBlock;
-import net.minecraft.block.TranslucentBlock;
 import net.minecraft.block.TransparentBlock;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
@@ -11,15 +9,10 @@ import net.minecraft.client.render.item.ItemModels;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
-import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MatrixUtil;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
@@ -29,9 +22,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import ru.theone_ss.vanilla_claws.VanillaClaws;
 import ru.theone_ss.vanilla_claws.client.TwoModelsItemRegistry;
-import ru.theone_ss.vanilla_claws.registry.VanillaClawsItems;
 
 @Mixin(ItemRenderer.class)
 public abstract class ItemRendererMixin {
@@ -69,7 +60,7 @@ public abstract class ItemRendererMixin {
     void getModel(ItemStack stack, World world, LivingEntity entity, int seed, CallbackInfoReturnable<BakedModel> cir) {
         TwoModelsItemRegistry.ENTRIES.forEach((id, item) -> {
             if (!stack.isEmpty() && stack.isOf(item) && entity != null) {
-                BakedModel model = ((FabricBakedModelManager)models.getModelManager()).getModel(id);
+                BakedModel model = models.getModelManager().getModel(id);
                 cir.setReturnValue(model);
             }
         });
@@ -78,60 +69,6 @@ public abstract class ItemRendererMixin {
     @Inject(method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",
             at = @At("HEAD"), cancellable = true )
     void renderItem(ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, CallbackInfo ci) {
-/*        if (!stack.isEmpty()) {
-            TwoModelsItemRegistry.ENTRIES.forEach((identifier, item) -> {
-                if (stack.isOf(item)) {
-                    boolean bl = renderMode == ModelTransformationMode.GUI || renderMode == ModelTransformationMode.GROUND || renderMode == ModelTransformationMode.FIXED;
-                    if (bl) {
-                        matrices.push();
-                        BakedModel bakedModel = models.getModelManager().getModel(new ModelIdentifier(identifier, "inventory"));
-                        bakedModel.getTransformation().getTransformation(renderMode).apply(leftHanded, matrices);
-                        matrices.translate(-0.5F, -0.5F, -0.5F);
-                        if (!bakedModel.isBuiltin()) {
-                            boolean bl2;
-                            if (renderMode != ModelTransformationMode.GUI && !renderMode.isFirstPerson() && stack.getItem() instanceof BlockItem) {
-                                Block block = ((BlockItem)stack.getItem()).getBlock();
-                                bl2 = !(block instanceof TransparentBlock) && !(block instanceof StainedGlassPaneBlock);
-                            } else {
-                                bl2 = true;
-                            }
-
-                            RenderLayer renderLayer = RenderLayers.getItemLayer(stack, bl2);
-                            VertexConsumer vertexConsumer;
-                            if (usesDynamicDisplay(stack) && stack.hasGlint()) {
-                                matrices.push();
-                                MatrixStack.Entry entry = matrices.peek();
-                                if (renderMode == ModelTransformationMode.GUI) {
-                                    MatrixUtil.scale(entry.getPositionMatrix(), 0.5F);
-                                } else if (renderMode.isFirstPerson()) {
-                                    MatrixUtil.scale(entry.getPositionMatrix(), 0.75F);
-                                }
-
-                                if (bl2) {
-                                    vertexConsumer = getDirectDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
-                                } else {
-                                    vertexConsumer = getDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
-                                }
-
-                                matrices.pop();
-                            } else if (bl2) {
-                                vertexConsumer = getDirectItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
-                            } else {
-                                vertexConsumer = getItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
-                            }
-
-                            this.renderBakedItemModel(bakedModel, stack, light, overlay, matrices, vertexConsumer);
-                        } else {
-                            this.builtinModelItemRenderer.render(stack, renderMode, matrices, vertexConsumers, light, overlay);
-                        }
-
-                        matrices.pop();
-                        ci.cancel();
-                    }
-                }
-            });
-        }*/
-
         if (!stack.isEmpty()) {
             TwoModelsItemRegistry.ENTRIES.forEach((identifier, item) -> {
                 if (stack.isOf(item)) {
