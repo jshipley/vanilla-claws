@@ -12,14 +12,12 @@ import java.util.function.Supplier;
 public class BaseToolMaterial implements ToolMaterial {
 
     private final int itemDurability;
-    private final float miningSpeed;
     private final float attackDamage;
     private final int enchantability;
     private final Lazy<Ingredient> repairIngredient;
 
-    public BaseToolMaterial(int durability, float miningSpeed, float damage, int enchantability, Supplier<Ingredient> repairIngredient) {
+    public BaseToolMaterial(int durability, float damage, int enchantability, Supplier<Ingredient> repairIngredient) {
         this.itemDurability = durability;
-        this.miningSpeed = miningSpeed;
         this.attackDamage = damage;
         this.enchantability = enchantability;
         this.repairIngredient = new Lazy<>(repairIngredient);
@@ -32,7 +30,7 @@ public class BaseToolMaterial implements ToolMaterial {
 
     @Override
     public float getMiningSpeedMultiplier() {
-        return this.miningSpeed;
+        return 0;
     }
 
     @Override

@@ -13,24 +13,20 @@ import java.util.function.Supplier;
 @SuppressWarnings("deprecation")
 public enum VanillaClawsMaterials implements ToolMaterial {
 
-    WOOD(79, 2.0F, 2.0F, 1, () -> Ingredient.fromTag(ItemTags.PLANKS)),
-    STONE(161, 2.0F, 4.0F, 1, () -> Ingredient.fromTag(ItemTags.STONE_TOOL_MATERIALS)),
-    COPPER(231, 2.0F, 2.0F, 1, () -> Ingredient.ofItems(Items.COPPER_INGOT)),
-    IRON(320, 2.0F, 6.0F, 1, () -> Ingredient.ofItems(Items.IRON_INGOT)),
-    DIAMOND(761, 2.0F, 8.0F, 1, () -> Ingredient.ofItems(Items.DIAMOND)),
-    GOLD(72, 12.0F, 12.0F, 26, () -> Ingredient.ofItems(Items.GOLD_INGOT)),
-    NETHERITE(1131, 2.0F, 9.0F, 1, () -> Ingredient.ofItems(Items.NETHERITE_INGOT));
+    WOOD(79, 10, () -> Ingredient.fromTag(ItemTags.PLANKS)),
+    STONE(161, 11, () -> Ingredient.fromTag(ItemTags.STONE_TOOL_MATERIALS)),
+    COPPER(245, 11, () -> Ingredient.ofItems(Items.COPPER_INGOT)),
+    IRON(344, 15, () -> Ingredient.ofItems(Items.IRON_INGOT)),
+    DIAMOND(801, 18, () -> Ingredient.ofItems(Items.DIAMOND)),
+    GOLD(77, 26, () -> Ingredient.ofItems(Items.GOLD_INGOT)),
+    NETHERITE(1331, 24, () -> Ingredient.ofItems(Items.NETHERITE_INGOT));
 
     private final int itemDurability;
-    private final float miningSpeed;
-    private final float attackDamage;
     private final int enchantability;
     private final Lazy<Ingredient> repairIngredient;
 
-    VanillaClawsMaterials(int durability, float miningSpeed, float damage, int enchantability, Supplier<Ingredient> repairIngredient) {
+    VanillaClawsMaterials(int durability, int enchantability, Supplier<Ingredient> repairIngredient) {
         this.itemDurability = durability;
-        this.miningSpeed = miningSpeed;
-        this.attackDamage = damage;
         this.enchantability = enchantability;
         this.repairIngredient = new Lazy<>(repairIngredient);
     }
@@ -41,14 +37,13 @@ public enum VanillaClawsMaterials implements ToolMaterial {
     }
 
     @Override
-
     public float getMiningSpeedMultiplier() {
-        return this.miningSpeed;
+        return 0;
     }
 
     @Override
     public float getAttackDamage() {
-        return this.attackDamage;
+        return 0;
     }
 
     @Override
