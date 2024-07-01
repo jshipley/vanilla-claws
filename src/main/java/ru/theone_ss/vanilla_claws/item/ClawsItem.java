@@ -5,6 +5,8 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.component.type.ToolComponent;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.*;
@@ -23,9 +25,9 @@ public class ClawsItem extends ToolItem {
     private static ToolComponent createToolComponent() {
         return new ToolComponent(
                 List.of(
-                        ToolComponent.Rule.ofAlwaysDropping(List.of(Blocks.COBWEB), 15.0F),
+                        ToolComponent.Rule.ofAlwaysDropping(List.of(Blocks.COBWEB), 22.0F),
                         ToolComponent.Rule.of(BlockTags.LEAVES, 15.0F),
-                        ToolComponent.Rule.of(BlockTags.WOOL, 5.0F),
+                        ToolComponent.Rule.of(BlockTags.WOOL, 8.0F),
                         ToolComponent.Rule.of(List.of(Blocks.VINE, Blocks.GLOW_LICHEN), 2.0F)
                 ),
                 1.0F,
@@ -55,7 +57,17 @@ public class ClawsItem extends ToolItem {
     }
 
     @Override
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        return true;
+    }
+
+    @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         return Items.DIAMOND_HOE.useOnBlock(context);
+    }
+
+    @Override
+    public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.damage(1, attacker, EquipmentSlot.MAINHAND);
     }
 }
