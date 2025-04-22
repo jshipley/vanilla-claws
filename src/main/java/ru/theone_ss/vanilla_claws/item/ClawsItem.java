@@ -10,9 +10,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.*;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
+import ru.theone_ss.vanilla_claws.VanillaClaws;
 
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class ClawsItem extends ToolItem {
         return new ToolComponent(
                 List.of(
                         ToolComponent.Rule.ofAlwaysDropping(List.of(Blocks.COBWEB), 22.0F),
+                        ToolComponent.Rule.ofAlwaysDropping(TagKey.of(RegistryKeys.BLOCK, Identifier.of(VanillaClaws.MOD_ID, "mineable/claws")), 2.0F),
                         ToolComponent.Rule.of(BlockTags.LEAVES, 15.0F),
                         ToolComponent.Rule.of(BlockTags.WOOL, 8.0F),
                         ToolComponent.Rule.of(List.of(Blocks.VINE, Blocks.GLOW_LICHEN), 2.0F)
